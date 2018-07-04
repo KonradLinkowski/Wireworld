@@ -81,6 +81,7 @@ function drawMap(map) {
       }
     }
   }
+  drawGrid(size)
 }
 
 function copyGrid(grid) {
