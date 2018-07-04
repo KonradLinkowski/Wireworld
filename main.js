@@ -1,5 +1,7 @@
 const $canvas = document.querySelector('#main_game')
 const ctx = $canvas.getContext('2d')
+const $itSlider = document.querySelector('#speed_slider')
+const $itMeter = document.querySelector('#speed_meter')
 
 resizeCanvas()
 window.addEventListener('resize', () => {
@@ -10,6 +12,15 @@ window.addEventListener('resize', () => {
 $canvas.addEventListener('contextmenu', () => {
   event.preventDefault()
 })
+
+$itSlider.addEventListener('input', event => {
+  $itMeter.innerHTML = event.target.value
+  iterationsPerSecond = event.target.value
+  startAgain()
+})
+
+let iterationsPerSecond = 25
+$itMeter.innerHTML = iterationsPerSecond
 
 const mouse = {
   x: innerWidth / 2,

@@ -11,6 +11,7 @@ grid[1][2] = 2
 drawMap(grid)
 let mousePressed = false
 window.addEventListener('mousedown', event => {
+  if (event.target != $canvas) return
   const pos = { x: Math.floor(mouse.x / size), y: Math.floor(mouse.y / size) }
   if (grid[pos.x][pos.y] == 0 && event.button == 0) {
     grid[pos.x][pos.y] = 1
@@ -35,6 +36,8 @@ window.addEventListener('mousemove', event => {
     if (grid[pos.x][pos.y] == 0) {
       grid[pos.x][pos.y] = 1
     }
+    drawMap(grid)
+    drawGrid()
   }
 })
 
@@ -108,9 +111,16 @@ function calcHeads(map, x, y) {
   return count
 }
 
+let int = setInterval(animate, 1000 / iterationsPerSecond)
+
+function startAgain() {
+  clearInterval(int)
+  int = setInterval(animate, 1000 / iterationsPerSecond)
+}
+
 function animate() {
   grid = iteration(grid)
   drawMap(grid)
-  requestAnimationFrame(animate)
+  //requestAnimationFrame(animate)
 }
 animate()

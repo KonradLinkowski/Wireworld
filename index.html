@@ -8,6 +8,10 @@
   <title>Wireworld</title>
 </head>
 <body>
+  <label for="speed_slider" class="speed_label">
+    iterations / second: <span id="speed_meter"></span>
+    <input min="1" max="50" type="range" name="speed" id="speed_slider" class="speed_slider">
+  </label>
   <canvas id="main_game" class="main_game"></canvas>
   <script src="main.js"></script>
   <script src="game.js"></script>

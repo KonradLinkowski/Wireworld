@@ -3,6 +3,20 @@ body {
   overflow: hidden;
 }
 
+.speed_label {
+  position: absolute;
+  bottom: 5%;
+  right: 5%;
+  background: white;
+  padding: 10px;
+  pointer-events: fill;
+  border-radius: 10px;
+}
+
+.speed_slider {
+  display: block;
+}
+
 .main_game {
   image-rendering: optimizeSpeed;             /* Older versions of FF          */
   image-rendering: -moz-crisp-edges;          /* FF 6.0+                       */
