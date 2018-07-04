@@ -30,8 +30,7 @@ window.addEventListener('mouseup', event => {
 })
 
 window.addEventListener('mousemove', event => {
-  const lastPos = { x: Math.floor(mouse.x / size), y: Math.floor(mouse.y / size) }
-  const newPos = { x: Math.floor(event.clientX / size), y: Math.floor(event.clientY / size) }
+  const pos = { x: Math.floor(mouse.x / size), y: Math.floor(mouse.y / size) }
   if (mousePressed) {
     if (grid[pos.x][pos.y] == 0) {
       grid[pos.x][pos.y] = 1
