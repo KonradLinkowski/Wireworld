@@ -2,7 +2,10 @@ const $canvas = document.querySelector('#main_game')
 const ctx = $canvas.getContext('2d')
 
 resizeCanvas()
-window.addEventListener('resize', resizeCanvas)
+window.addEventListener('resize', () => {
+  resizeCanvas()
+  drawGrid(size)
+})
 
 const mouse = {
   x: innerWidth / 2,
@@ -12,42 +15,33 @@ const mouse = {
 window.addEventListener('mousemove', event => {
   mouse.x = event.clientX
   mouse.y = event.clientY
-  // console.log(mouse)
-  drawWhiteAroundMouse(size)
 })
 
 
-const size = 10
-drawRandomPixels(size)
+const size = 15
+drawGrid(size)
 function animate() {
-  // drawRandomPixels(size)
   requestAnimationFrame(animate)
 }
 animate()
 
-function drawRandomPixels(size) {
-  const x = $canvas.width / size
-  const y = $canvas.height / size
-  for (let i = 0; i < x; i++) {
-    for (let j = 0; j < y; j++) {
-      ctx.fillStyle = getRandomColor()
-      drawPixel(i, j, size)
-    }
+
+function drawGrid(size) {
+  const lineWidth = 1
+  for (let i = 0; i < $canvas.width / size; i++) {
+    drawLine({ x: i * size, y: 0 }, { x: i * size, y: $canvas.height }, lineWidth)
+  }
+  for (let i = 0; i < $canvas.height / size; i++) {
+    drawLine({ x: 0, y: i * size }, { x: $canvas.width, y: i * size }, lineWidth)
   }
 }
 
-function drawWhiteAroundMouse(size) {
-  let range = 10
-  let pos = { x: Math.floor(mouse.x / size), y: Math.floor(mouse.y / size) }
-  for (let i = pos.x - range + 1; i <  pos.x + range; i++) {
-    for (let j = pos.y - range + 1; j < pos.y + range; j++) {
-      let dist = distance(pos, { x: i, y: j})
-      if (dist <= range) {
-        ctx.fillStyle = getRandomColor() //getRGB(255, 255, 255, (1 - normalize(dist, 0, range)))
-        drawPixel(i, j, size)
-      }
-    }
-  }
+function drawLine(start, end, size) {
+  ctx.beginPath();
+  ctx.lineWidth = size
+  ctx.moveTo(start.x, start.y);
+  ctx.lineTo(end.x, end.y);
+  ctx.stroke();
 }
 
 function drawPixel(x, y, size) {
