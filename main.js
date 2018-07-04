@@ -7,6 +7,10 @@ window.addEventListener('resize', () => {
   drawGrid(size)
 })
 
+$canvas.addEventListener('contextmenu', () => {
+  event.preventDefault()
+})
+
 const mouse = {
   x: innerWidth / 2,
   y: innerHeight / 2
@@ -17,14 +21,8 @@ window.addEventListener('mousemove', event => {
   mouse.y = event.clientY
 })
 
-
 const size = 15
 drawGrid(size)
-function animate() {
-  requestAnimationFrame(animate)
-}
-animate()
-
 
 function drawGrid(size) {
   const lineWidth = 1
@@ -44,7 +42,8 @@ function drawLine(start, end, size) {
   ctx.stroke();
 }
 
-function drawPixel(x, y, size) {
+function drawPixel(x, y, size, color) {
+  ctx.fillStyle = color
   ctx.fillRect(x * size, y * size, size, size)
 }
 
